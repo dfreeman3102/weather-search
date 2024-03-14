@@ -9,7 +9,16 @@ var weatherdetails = (cityName, lat, lon) => {
         return response.json();
     })
     .then(function(data){
-        console.log(data);
+        //filters for only one forecast per day due to the new forecast every 3 hours
+        var days = [];
+        var fivedaycast = data.list.filter(forecast => {
+            var date = new Date(forecast.dt_txt).getDate();
+            if(!days.includes(date)){
+                return days.push(date);
+            }
+        })
+        console.log(fivedaycast);
+
     })
 }
 
