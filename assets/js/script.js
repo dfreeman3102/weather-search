@@ -2,13 +2,13 @@ var button = document.querySelector(".search")
 var input = document.querySelector(".input")
 var fivedaycards = document.querySelector("#five-day-forecast")
 var apiKey = "409871a44bb3e3aa5098d1ea472cba80"
-
+//adds individual weather data based on parameters listed below.
 var weatherCard = (weatherData) => {
     return `<section id="card">
     <h5>Date:${weatherData.dt_txt.split(" ")[0]}</h4>
     <p>Temp:${weatherData.main.temp}</p>
-    <p>${weatherData.wind.speed} MPH</p>
-    <p>${weatherData.main.humidity} %</p>
+    <p>Wind Speed: ${weatherData.wind.speed} MPH</p>
+    <p>Humidity: ${weatherData.main.humidity} %</p>
 </section>`;
 }
 var weatherdetails = (cityName, lat, lon) => {
@@ -27,7 +27,11 @@ var weatherdetails = (cityName, lat, lon) => {
                     return days.push(date);
                 }
             })
+            //clears the input and previous forecast data
+            input.value = "";
+            fivedaycards.innerHTML = "";
             console.log(fivedaycast);
+            //a for each loop to add the weather data for however many days speccified
             fivedaycast.forEach(weatherData => {
                 fivedaycards.insertAdjacentHTML("beforeend", weatherCard(weatherData));
             })
