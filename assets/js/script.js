@@ -1,15 +1,26 @@
 var button = document.querySelector(".search")
 var input = document.querySelector(".input")
 var fivedaycards = document.querySelector("#five-day-forecast")
+var dayCard = document.querySelector("#day-cast")
 var apiKey = "409871a44bb3e3aa5098d1ea472cba80"
 //adds individual weather data based on parameters listed below.
-var weatherCard = (weatherData) => {
+var weatherCard = (cityName, weatherData, index) => {
+    if(index === 0){
+        return ` 
+        <h3>${cityName}</h3>
+        <h3>Today</h3>
+        <p>Temp: ${weatherData.main.temp}</p>
+        <p>Wind Speed: ${weatherData.wind.speed}MPH</p>
+        <p>Humidity: ${weatherData.main.humidity}%</p>
+    </section>`
+    } else {
     return `<section id="card">
     <h5>Date:${weatherData.dt_txt.split(" ")[0]}</h4>
     <p>Temp:${weatherData.main.temp}</p>
     <p>Wind Speed: ${weatherData.wind.speed} MPH</p>
     <p>Humidity: ${weatherData.main.humidity} %</p>
 </section>`;
+    }
 }
 var weatherdetails = (cityName, lat, lon) => {
     var cityUrl = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`
@@ -29,11 +40,18 @@ var weatherdetails = (cityName, lat, lon) => {
             })
             //clears the input and previous forecast data
             input.value = "";
+            dayCard.innerHTML = "";
             fivedaycards.innerHTML = "";
             console.log(fivedaycast);
+            
             //a for each loop to add the weather data for however many days speccified
-            fivedaycast.forEach(weatherData => {
-                fivedaycards.insertAdjacentHTML("beforeend", weatherCard(weatherData));
+            fivedaycast.forEach((weatherData, index) => {
+                //adds the weather data for the current day cast
+                if(index === 0){
+                    dayCard.insertAdjacentHTML("beforeend", weatherCard(cityName, weatherData, index));
+                }else{
+                fivedaycards.insertAdjacentHTML("beforeend", weatherCard(cityName, weatherData, index));
+                }
             })
         })
 }
