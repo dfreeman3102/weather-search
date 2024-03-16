@@ -5,18 +5,18 @@ var dayCard = document.querySelector("#day-cast")
 var apiKey = "409871a44bb3e3aa5098d1ea472cba80"
 //adds individual weather data based on parameters listed below.
 var weatherCard = (cityName, weatherData, index) => {
-    if(index === 0){
+    if (index === 0) {
         return ` 
         <h3>${cityName}</h3>
         <h3>Today</h3>
-        <p>Temp: ${weatherData.main.temp}</p>
+        <p>Temp: ${weatherData.main.temp} °F</p>
         <p>Wind Speed: ${weatherData.wind.speed}MPH</p>
         <p>Humidity: ${weatherData.main.humidity}%</p>
     </section>`
     } else {
-    return `<section id="card">
+        return `<section id="card">
     <h5>Date:${weatherData.dt_txt.split(" ")[0]}</h4>
-    <p>Temp:${weatherData.main.temp}</p>
+    <p>Temp:${weatherData.main.temp} °F</p>
     <p>Wind Speed: ${weatherData.wind.speed} MPH</p>
     <p>Humidity: ${weatherData.main.humidity} %</p>
 </section>`;
@@ -43,14 +43,14 @@ var weatherdetails = (cityName, lat, lon) => {
             dayCard.innerHTML = "";
             fivedaycards.innerHTML = "";
             console.log(fivedaycast);
-            
+
             //a for each loop to add the weather data for however many days speccified
             fivedaycast.forEach((weatherData, index) => {
                 //adds the weather data for the current day cast
-                if(index === 0){
+                if (index === 0) {
                     dayCard.insertAdjacentHTML("beforeend", weatherCard(cityName, weatherData, index));
-                }else{
-                fivedaycards.insertAdjacentHTML("beforeend", weatherCard(cityName, weatherData, index));
+                } else {
+                    fivedaycards.insertAdjacentHTML("beforeend", weatherCard(cityName, weatherData, index));
                 }
             })
         })
