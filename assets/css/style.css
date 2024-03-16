@@ -1,5 +1,8 @@
+:root{
+    --primary-color:rgb(143, 226, 254);
+}
 #title{
-    background: rgb(143, 226, 254);
+    background: var(--primary-color);
     text-align: center;
     padding: 10px;
     margin-top: 0px;
@@ -11,6 +14,7 @@ body{
 #search-bar{
     text-align: center;
     border: solid black 1px;
+    padding: 10px;
 }
 input{
     background: black;
@@ -25,4 +29,20 @@ ul{
 }
 li{
     list-style: none;
+}
+#day-cast{
+    background:rgb(35, 34, 34);
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin: 10px;
+    width:500px;
+}
+
+#card{
+    background: var(--primary-color);
+    width: 200px;
+    text-align: center;
+    padding: 10px;
+    margin: 10px;
 }
