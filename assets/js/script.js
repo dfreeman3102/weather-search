@@ -12,11 +12,12 @@ var weatherCard = (cityName, weatherData, index) => {
         <p>Temp: ${weatherData.main.temp} °F</p>
         <p>Wind Speed: ${weatherData.wind.speed}MPH</p>
         <p>Humidity: ${weatherData.main.humidity}%</p>
-    </section>`
+        </section>`
     } else {
         return `<section id="card">
-    <h5>Date:${weatherData.dt_txt.split(" ")[0]}</h4>
-    <p>Temp:${weatherData.main.temp} °F</p>
+        <h5>Date:${weatherData.dt_txt.split(" ")[0]}</h4>
+        <img src="https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png">
+        <p>Temp:${weatherData.main.temp} °F</p>
     <p>Wind Speed: ${weatherData.wind.speed} MPH</p>
     <p>Humidity: ${weatherData.main.humidity} %</p>
 </section>`;
