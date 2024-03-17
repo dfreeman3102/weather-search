@@ -18,9 +18,9 @@ var weatherCard = (cityName, weatherData, index) => {
         <h5>Date:${weatherData.dt_txt.split(" ")[0]}</h4>
         <img src="https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png">
         <p>Temp:${weatherData.main.temp} °F</p>
-    <p>Wind Speed: ${weatherData.wind.speed} MPH</p>
-    <p>Humidity: ${weatherData.main.humidity} %</p>
-</section>`;
+        <p>Wind Speed: ${weatherData.wind.speed} MPH</p>
+        <p>Humidity: ${weatherData.main.humidity} %</p>
+        </section>`;
     }
 }
 var weatherdetails = (cityName, lat, lon) => {
@@ -55,14 +55,14 @@ var weatherdetails = (cityName, lat, lon) => {
                 }
             })
         })
-}
-
-function getCoords() {
-    //entered city name, with removed spaces
-    var cityName = input.value.trim();
-    var coordUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${apiKey}`;
-    //gets the coords and city name from the response
-    fetch(coordUrl)
+    }
+    
+    function getCoords() {
+        //entered city name, with removed spaces
+        var cityName = input.value.trim();
+        var coordUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${apiKey}`;
+        //gets the coords and city name from the response
+        fetch(coordUrl)
         .then(function (response) {
             return response.json();
         })
@@ -70,8 +70,21 @@ function getCoords() {
             console.log(data);
             var { name, lat, lon } = data[0];
             weatherdetails(name, lat, lon);
+            retrieveCity();
         })
+        
+    }
+    //setting city to local storage
+    function retrieveCity(){
+    //get data from storage
+    let cityArray = localStorage.getItem("cityInput");
+    let cityInput = cityArray ? JSON.parse(cityArray) : [];
 
-}
-
+    let recentCity = input.value;
+    if (recentCity != ''){
+        cityInput.push(recentCity);
+        localStorage.setItem("cityInput", JSON.stringify(cityInput));
+    }
+    }
+    
 button.addEventListener("click", getCoords);
