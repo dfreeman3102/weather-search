@@ -82,9 +82,23 @@ var weatherdetails = (cityName, lat, lon) => {
 
     let recentCity = input.value;
     if (recentCity != ''){
+        //add input to the stored array and updates the storage
         cityInput.push(recentCity);
         localStorage.setItem("cityInput", JSON.stringify(cityInput));
+
+        //displays the list
+        displayRecents(cityInput);
     }
-    }
+    };
     
+    //function to display the list under recent search
+    function displayRecents(array){
+        var listEl = document.getElementById("recent-searches");
+        listEl.innerHTML = '';
+        array.forEach(function(item){
+            var liEl = document.createElement('li');
+            liEl.textContent = item;
+            listEl.appendChild(liEl);
+        })
+    };
 button.addEventListener("click", getCoords);
