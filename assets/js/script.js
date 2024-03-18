@@ -10,6 +10,7 @@ var weatherCard = (cityName, weatherData, index) => {
         <section id="day"
         <h3>${cityName}</h3>
         <h3>Today</h3>
+        <img src="https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png">
         <p>Temp: ${weatherData.main.temp} °F</p>
         <p>Wind Speed: ${weatherData.wind.speed}MPH</p>
         <p>Humidity: ${weatherData.main.humidity}%</p>
