@@ -7,6 +7,7 @@ var apiKey = "409871a44bb3e3aa5098d1ea472cba80"
 var weatherCard = (cityName, weatherData, index) => {
     if (index === 0) {
         return ` 
+        <section id="day"
         <h3>${cityName}</h3>
         <h3>Today</h3>
         <p>Temp: ${weatherData.main.temp} °F</p>
