@@ -55,14 +55,14 @@ var weatherdetails = (cityName, lat, lon) => {
                 }
             })
         })
-    }
-    
-    function getCoords() {
-        //entered city name, with removed spaces
-        var cityName = input.value.trim();
-        var coordUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${apiKey}`;
-        //gets the coords and city name from the response
-        fetch(coordUrl)
+}
+
+function getCoords() {
+    //entered city name, with removed spaces
+    var cityName = input.value.trim();
+    var coordUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${apiKey}`;
+    //gets the coords and city name from the response
+    fetch(coordUrl)
         .then(function (response) {
             return response.json();
         })
@@ -72,16 +72,16 @@ var weatherdetails = (cityName, lat, lon) => {
             weatherdetails(name, lat, lon);
             retrieveCity();
         })
-        
-    }
-    //setting city to local storage
-    function retrieveCity(){
+
+}
+//setting city to local storage
+function retrieveCity() {
     //get data from storage
     let cityArray = localStorage.getItem("cityInput");
     let cityInput = cityArray ? JSON.parse(cityArray) : [];
 
     let recentCity = input.value;
-    if (recentCity != ''){
+    if (recentCity != '') {
         //add input to the stored array and updates the storage
         cityInput.push(recentCity);
         localStorage.setItem("cityInput", JSON.stringify(cityInput));
@@ -89,16 +89,16 @@ var weatherdetails = (cityName, lat, lon) => {
         //displays the list
         displayRecents(cityInput);
     }
-    };
-    
-    //function to display the list under recent search
-    function displayRecents(array){
-        var listEl = document.getElementById("recent-searches");
-        listEl.innerHTML = '';
-        array.forEach(function(item){
-            var liEl = document.createElement('li');
-            liEl.textContent = item;
-            listEl.appendChild(liEl);
-        })
-    };
+};
+
+//function to display the list under recent search
+function displayRecents(array) {
+    var listEl = document.getElementById("recent-searches");
+    listEl.innerHTML = '';
+    array.forEach(function (item) {
+        var liEl = document.createElement('li');
+        liEl.textContent = item;
+        listEl.appendChild(liEl);
+    })
+};
 button.addEventListener("click", getCoords);
