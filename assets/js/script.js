@@ -97,10 +97,19 @@ function retrieveCity() {
 function displayRecents(array) {
     var listEl = document.getElementById("recent-searches");
     listEl.innerHTML = '';
+    //creates a button of each recent search
     array.forEach(function (item) {
         var liEl = document.createElement('li');
-        liEl.textContent = item;
+        var buttonEl = document.createElement("button");
+        buttonEl.textContent = item;
+        liEl.appendChild(buttonEl);
         listEl.appendChild(liEl);
+        //makes button click and search for selected city
+        buttonEl.addEventListener("click", function(event){
+            var buttonText = buttonEl.textContent;
+            input.value = buttonText;
+            getCoords();
+        })
     })
 };
 button.addEventListener("click", getCoords);
