@@ -4,8 +4,7 @@ weather search site. It must present an input to search for a city, present curr
 conditions for the searched city, including the city name, date, icon for weather, temp, humidity, and wind speed. Recent searches must be represented under a recent search section and when clicked, it shows that weather data.
 
 Here is a screenshot of the completed work:
-![alt text](<assets/imgs/Screenshot 2024-03-18 162749.png>)
-
+![alt text](<assets/imgs/Screenshot 2024-03-18 221039.png>)
 
 Here is the link to the finished project:
 

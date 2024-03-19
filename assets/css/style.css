@@ -1,9 +1,11 @@
 :root {
     --primary-color: rgb(143, 226, 254);
+    --secondary-color: rgb(35, 34, 34);
 }
 
 #title {
-    background: var(--primary-color);
+    background: var(--secondary-color);
+    color: var(--primary-color);
     text-align: center;
     padding: 10px;
     margin: 10px;
@@ -11,12 +13,12 @@
 }
 
 body {
-    background: grey;
+    background: linear-gradient(black,white, black);
 }
 
 #search-bar {
     text-align: center;
-    background: rgb(225, 112, 112);
+    background: var(--primary-color);
     border-radius: 10px;
     padding: 10px;
     margin: 10px;
@@ -27,21 +29,29 @@ input {
     color: white;
 }
 
-button {
+.search {
     background: black;
     color: white;
 }
 
 ul {
+    display: flex;
+    flex-wrap: wrap;
     text-align: center;
 }
-
-li {
+li{
     list-style: none;
+    width: 30%;
+}
+
+li button {
+    margin: 5px;
+    background: var(--secondary-color);
+    color: var(--primary-color);
 }
 
 #day-cast {
-    background: rgb(35, 34, 34);
+    background: var(--secondary-color);
     color: white;
     text-align: center;
     padding: 10px;
