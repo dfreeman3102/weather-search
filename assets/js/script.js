@@ -63,7 +63,7 @@ var weatherdetails = (cityName, lat, lon) => {
 
 function getCoords(cityName) {
     //entered city name, with removed spaces
-    var coordUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${apiKey}`;
+    var coordUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${apiKey}`;
     //gets the coords and city name from the response
     fetch(coordUrl)
         .then(function (response) {
