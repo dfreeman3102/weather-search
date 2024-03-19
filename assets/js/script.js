@@ -3,13 +3,15 @@ var input = document.querySelector(".input")
 var fivedaycards = document.querySelector("#five-day-forecast")
 var dayCard = document.querySelector("#day-cast")
 var apiKey = "409871a44bb3e3aa5098d1ea472cba80"
+var listEl = document.getElementById("recent-searches");
+var cityArray = JSON.parse(localStorage.getItem("cityInput")) || [];
 //adds individual weather data based on parameters listed below.
 var weatherCard = (cityName, weatherData, index) => {
     if (index === 0) {
         return ` 
         <section id="day"
         <h3>${cityName}</h3>
-        <h3>Today</h3>
+        <h3>${weatherData.dt_txt.split(" ")[0]}</h3>
         <img src="https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png">
         <p>Temp: ${weatherData.main.temp} °F</p>
         <p>Wind Speed: ${weatherData.wind.speed}MPH</p>
@@ -59,9 +61,8 @@ var weatherdetails = (cityName, lat, lon) => {
         })
 }
 
-function getCoords() {
+function getCoords(cityName) {
     //entered city name, with removed spaces
-    var cityName = input.value.trim();
     var coordUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${apiKey}`;
     //gets the coords and city name from the response
     fetch(coordUrl)
@@ -72,44 +73,41 @@ function getCoords() {
             console.log(data);
             var { name, lat, lon } = data[0];
             weatherdetails(name, lat, lon);
-            retrieveCity();
+            retrieveCity(cityName);
         })
 
 }
 //setting city to local storage
-function retrieveCity() {
+function retrieveCity(cityName) {
     //get data from storage
-    let cityArray = localStorage.getItem("cityInput");
-    let cityInput = cityArray ? JSON.parse(cityArray) : [];
-
-    let recentCity = input.value;
-    if (recentCity != '') {
-        //add input to the stored array and updates the storage
-        cityInput.push(recentCity);
-        localStorage.setItem("cityInput", JSON.stringify(cityInput));
-
+    if (!(cityArray && cityArray.includes(cityName))) {
+        cityArray.push(cityName)
+        localStorage.setItem("cityInput", JSON.stringify(cityArray));
         //displays the list
-        displayRecents(cityInput);
-    }
+        displayRecents();
+    };
 };
 
 //function to display the list under recent search
-function displayRecents(array) {
-    var listEl = document.getElementById("recent-searches");
+function displayRecents() {
     listEl.innerHTML = '';
     //creates a button of each recent search
-    array.forEach(function (item) {
+    cityArray.forEach(function (item) {
         var liEl = document.createElement('li');
         var buttonEl = document.createElement("button");
         buttonEl.textContent = item;
+
         liEl.appendChild(buttonEl);
         listEl.appendChild(liEl);
-        //makes button click and search for selected city
-        buttonEl.addEventListener("click", function(event){
-            var buttonText = buttonEl.textContent;
-            input.value = buttonText;
-            getCoords();
-        })
     })
 };
-button.addEventListener("click", getCoords);
+displayRecents()
+button.addEventListener("click", function (event) {
+    getCoords(input.value)
+});
+listEl.addEventListener("click", function (event) {
+    console.log(event.target);
+    var cityName = event.target.innerHTML;
+    getCoords(cityName);
+});
+getCoords(cityArray[0] || "London");
