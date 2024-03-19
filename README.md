@@ -1,5 +1,5 @@
 # weather-search
-Sixth bootcamp challenge, using what we have learned in class and outside research to make a
+Sixth bootcamp challenge, using what we have learned in class, with help from instructors, and outside research (including Youtube tutorials, stack overflow, etc.) to make a
 weather search site. It must present an input to search for a city, present current and future weather
 conditions for the searched city, including the city name, date, icon for weather, temp, humidity, and wind speed. Recent searches must be represented under a recent search section and when clicked, it shows that weather data.
 
