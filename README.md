@@ -7,4 +7,4 @@ Here is a screenshot of the completed work:
 ![alt text](<assets/imgs/Screenshot 2024-03-18 221039.png>)
 
 Here is the link to the finished project:
-
+https://dfreeman3102.github.io/weather-search/
