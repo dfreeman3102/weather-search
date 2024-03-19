@@ -28,7 +28,7 @@ var weatherCard = (cityName, weatherData, index) => {
     }
 }
 var weatherdetails = (cityName, lat, lon) => {
-    var cityUrl = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`
+    var cityUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`
 
     fetch(cityUrl)
         .then(function (response) {
